@@ -13,6 +13,7 @@
         <activity android:name=".ListActivity"
             andriod:screenOrientation="portrait">
 
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
