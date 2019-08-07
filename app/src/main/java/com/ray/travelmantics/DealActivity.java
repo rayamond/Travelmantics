@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -123,9 +124,10 @@ public class DealActivity extends AppCompatActivity {
             return;
         }
         mDatabaseReference.child(deal.getId()).removeValue();
-        Log.d("image name", deal.getImageName());
-        if (deal.getImageName() != null && deal.getImageName().isEmpty() == false) {
-            StorageReference picRef = FirebaseUtil.mStorage.getReference().child(deal.getImageName());
+       // Log.d("image name", deal.getImageName());
+        if (this.deal.getImageName() != null && deal.getImageName().isEmpty()) {
+            FirebaseUtil.connectStorage();
+            StorageReference picRef = FirebaseStorage.getInstance().getReference().child(this.deal.getImageName());
             picRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -134,7 +136,7 @@ public class DealActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d("Delete Image", e.getMessage());
+                    Log.d("Delete Image", "Not deleted");
                 }
             });
         }
@@ -162,15 +164,15 @@ public class DealActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu, menu);
-        if (FirebaseUtil.isAdmin) {
-            menu.findItem(R.id.delete_menu).setVisible(true);
-            menu.findItem(R.id.save_menu).setVisible(true);
-            enableEditTexts(true);
-        } else {
-            menu.findItem(R.id.delete_menu).setVisible(false);
-            menu.findItem(R.id.save_menu).setVisible(false);
-            enableEditTexts(false);
-        }
+        if (FirebaseUtil.isAdmin)
+        { menu.findItem(R.id.delete_menu).setVisible(true);
+        menu.findItem(R.id.save_menu).setVisible(true);         enableEditTexts(true);
+     } else {
+
+          menu.findItem(R.id.delete_menu).setVisible(false);
+           menu.findItem(R.id.save_menu).setVisible(false);
+           enableEditTexts(false);
+       }
         return true;
     }
 

@@ -39,11 +39,11 @@ public class ListActivity extends AppCompatActivity {
         inflater.inflate(R.menu.list_activity_menu, menu);
         MenuItem insertMenu = menu.findItem(R.id.insert_menu);
         if (FirebaseUtil.isAdmin == true){
-            insertMenu.setVisible(true);
-        }
-        else{
-            insertMenu.setVisible(false);
-        }
+          insertMenu.setVisible(true);
+      }
+       else{
+           insertMenu.setVisible(false);
+      }
         return true;
     }
 

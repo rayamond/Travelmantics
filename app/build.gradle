@@ -33,7 +33,6 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-    implementation 'com.google.firebase:firebase-firestore:19.0.0'
     implementation 'com.google.firebase:firebase-storage:18.1.1'
     implementation ('com.squareup.picasso:picasso:2.71828') {
         exclude group: 'com.android.support'
