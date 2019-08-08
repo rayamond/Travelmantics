@@ -110,6 +110,7 @@ public static void signIn(){
             AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
+                    .setLogo(R.drawable.ic_launcher_foreground)
                     .build(),
             RC_SIGN_IN);
 }
